@@ -61,7 +61,23 @@ This section is adapted from the Microsoft Learn exercise
 [Build a Microsoft Teams tab app](https://learn.microsoft.com/en-us/training/modules/teams-toolkit-vsc-tab-app/build-tab-app-exercise).
 Differences from that exercise: the toolkit is now called the Microsoft 365 Agents Toolkit, the template is TypeScript/React based (`src/Tab/App.tsx`), and the UI is changed in React code instead of `hello.html`.
 
-### Create a new project
+### Clone the git repository (recommended)
+
+1. Open a terminal in the folder where you keep your projects (for example, `Documents`).
+2. Clone the repository:
+
+   ```powershell
+   git clone https://github.com/ng-jianshn/teams-app.git
+   ```
+
+3. In VS Code, select **File > Open Folder** and open the cloned `teams-app` folder.
+
+> **Important:** Open the folder that directly contains `m365agents.yml`, `package.json` and `appPackage/`. This must be the root of the workspace, not a nested folder (for example, `Documents\teams-app\teams-app`). Otherwise the Microsoft 365 Agents Toolkit cannot recognise the project later on.
+
+<details>
+<summary><strong>Create a new project from the template (alternative)</strong></summary>
+
+> **Note:** If you do not want to clone the repository, you can create the project directly in VS Code using the steps below. However, the repository contains modifications that add LLM calling (Azure OpenAI), and those features are not present in the default sample template.
 
 1. In VS Code, select the **Microsoft 365 Agents Toolkit** icon in the Activity Bar.
 2. Select **Create a New Agent/App**.
@@ -78,6 +94,8 @@ Differences from that exercise: the toolkit is now called the Microsoft 365 Agen
 8. A notification confirms the project was scaffolded, and VS Code opens the new project.
 
    ![Scaffolded project](images/scaffold-project.png)
+
+</details>
 
 ### Project structure
 
