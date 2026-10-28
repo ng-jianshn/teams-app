@@ -4,43 +4,18 @@ This guide covers setting up everything needed to build, run and customize the C
 
 Contents:
 
-1. [Provision a Microsoft 365 developer account](#1-provision-a-microsoft-365-developer-account)
-2. [Install Visual Studio Code](#2-install-visual-studio-code)
-3. [Create the tab app](#3-create-the-tab-app)
-4. [Install the Microsoft 365 Agents Toolkit](#4-install-the-microsoft-365-agents-toolkit)
-5. [Configure Azure OpenAI](#5-configure-azure-openai)
-6. [Run and debug the app](#6-run-and-debug-the-app)
-7. [Customize the UI from code](#7-customize-the-ui-from-code)
-8. [Zip the app package and upload it to Teams](#8-zip-the-app-package-and-upload-it-to-teams)
-9. [Troubleshooting](#9-troubleshooting)
+1. [Install Visual Studio Code](#1-install-visual-studio-code)
+2. [Create the tab app](#2-create-the-tab-app)
+3. [Install the Microsoft 365 Agents Toolkit](#3-install-the-microsoft-365-agents-toolkit)
+4. [Configure Azure OpenAI](#4-configure-azure-openai)
+5. [Run and debug the app](#5-run-and-debug-the-app)
+6. [Customize the UI from code](#6-customize-the-ui-from-code)
+7. [Zip the app package and upload it to Teams](#7-zip-the-app-package-and-upload-it-to-teams)
+8. [Troubleshooting](#8-troubleshooting)
 
 ---
 
-## 1. Provision a Microsoft 365 developer account
-
-Teams Toolkit needs a Microsoft 365 work or school account that is allowed to sideload custom apps. The easiest way to get one is the Microsoft 365 Developer Program sandbox.
-
-1. Go to the [Microsoft 365 Developer Program](https://developer.microsoft.com/microsoft-365/dev-program) and select **Join now**.
-2. Sign in with a Microsoft account and complete the profile questions.
-3. Select **Set up E5 subscription** and choose **Instant sandbox** (or **Configurable sandbox**).
-4. Create an **admin username** and **password**. The tenant domain will look like `<username>.onmicrosoft.com`.
-5. Wait for provisioning to finish, then open the [Microsoft 365 admin center](https://admin.microsoft.com) and sign in with the new admin account to confirm it works.
-
-![Microsoft 365 Developer Program sandbox setup](images/m365-developer.png)
-
-Verify that custom app upload is enabled:
-
-1. Open the [Teams admin center](https://admin.teams.microsoft.com).
-2. Go to **Teams apps** > **Setup policies** > **Global (Org-wide default)**.
-3. Turn **Upload custom apps** **On**.
-
-![Teams admin center custom app upload setting](images/teams-admin.png)
-
-> If you already have a work or school tenant, ask your tenant admin to enable custom app upload for your account instead.
-
----
-
-## 2. Install Visual Studio Code
+## 1. Install Visual Studio Code
 
 1. Download VS Code from <https://code.visualstudio.com/> and run the installer.
 2. Install [Node.js](https://nodejs.org/) version **22 or later** (required by this template). Verify in a terminal:
@@ -55,7 +30,7 @@ Verify that custom app upload is enabled:
 
 ---
 
-## 3. Create the tab app
+## 2. Create the tab app
 
 This section is adapted from the Microsoft Learn exercise
 [Build a Microsoft Teams tab app](https://learn.microsoft.com/en-us/training/modules/teams-toolkit-vsc-tab-app/build-tab-app-exercise).
@@ -117,7 +92,7 @@ Differences from that exercise: the toolkit is now called the Microsoft 365 Agen
 
 ---
 
-## 4. Install the Microsoft 365 Agents Toolkit
+## 3. Install the Microsoft 365 Agents Toolkit
 
 The Microsoft 365 Agents Toolkit (formerly Teams Toolkit) is a VS Code extension that scaffolds, provisions and debugs Teams apps.
 
@@ -128,17 +103,19 @@ The Microsoft 365 Agents Toolkit (formerly Teams Toolkit) is a VS Code extension
 ![Microsoft 365 Agents Toolkit in the Extensions view](images/m365-agent-toolkit.png)
 
 4. Select the toolkit icon to open the toolkit panel.
-5. In the **ACCOUNTS** section, select **Sign in to Microsoft 365** and sign in with the developer account from step 1.
-
-![Agents Toolkit accounts section](images/agenttoolkit-accounts.png)
+5. In the **ACCOUNTS** section, select **Sign in to Microsoft 365** and sign in with your Microsoft 365 developer account.
 
 > The toolkit requires a work or school account with custom app upload permission. Personal Microsoft accounts are not supported.
 
-> **Reminder:** Always sign in with the Microsoft 365 developer sandbox account created in [section 1](#1-provision-a-microsoft-365-developer-account), not your personal or work account.
+6. Set up two-factor authentication (2FA) for your account with an authenticator app of your choice (for example, Microsoft Authenticator or Google Authenticator). Follow the on-screen prompts to scan the QR code and verify the code when signing in.
+
+![Agents Toolkit accounts section](images/agenttoolkit-accounts.png)
+
+> **Reminder:** Always sign in with the Microsoft 365 developer sandbox account, not your personal or work account.
 
 ---
 
-## 5. Configure Azure OpenAI
+## 4. Configure Azure OpenAI
 
 The chatbox in the tab sends messages to the backend (`POST /api/chat`), which calls Azure OpenAI. The API key stays on the server and is never sent to the browser.
 
@@ -171,7 +148,7 @@ Notes:
 
 ---
 
-## 6. Run and debug the app
+## 5. Run and debug the app
 
 ### Start debugging
 
@@ -204,7 +181,7 @@ The toolkit then:
 
 ---
 
-## 7. Customize the UI from code
+## 6. Customize the UI from code
 
 The tab UI is a React app. There is no `hello.html` as in the Learn exercise; edit these files instead.
 
@@ -262,7 +239,7 @@ Edit [index.html](index.html) (`<title>`).
 
 ---
 
-## 8. Zip the app package and upload it to Teams
+## 7. Zip the app package and upload it to Teams
 
 Packaging produces a `.zip` file (manifest plus icons) that can be uploaded to Teams or the Teams Developer Portal.
 
@@ -270,7 +247,7 @@ Packaging produces a `.zip` file (manifest plus icons) that can be uploaded to T
 
 The manifest ([appPackage/manifest.json](appPackage/manifest.json)) needs `TAB_ENDPOINT` and `TAB_DOMAIN`. For the `local` environment these are set automatically to `https://localhost:3978` and `localhost` when you debug.
 
-1. Press `F5` (or select **Run** > **Start Debugging**) at least once, as described in [section 6](#6-run-and-debug-the-app).
+1. Press `F5` (or select **Run** > **Start Debugging**) at least once, as described in [section 5](#5-run-and-debug-the-app).
 2. Keep the dev server running while you use the uploaded app, because the tab loads from `localhost`.
 
 If you skip step 1, zipping fails with `Missing environment variables 'TAB_ENDPOINT, TAB_DOMAIN'`.
@@ -298,11 +275,11 @@ Option 2: Upload directly in Teams
 2. Select **Upload an app** > **Upload a custom app** and choose the zip file.
 3. Select **Add** to install it.
 
-> Uploading a custom app requires custom app upload to be enabled for your account (see [section 1](#1-provision-a-microsoft-365-developer-account)).
+> Uploading a custom app requires custom app upload to be enabled for your account.
 
 ---
 
-## 9. Troubleshooting
+## 8. Troubleshooting
 
 | Symptom | Cause / fix |
 | --- | --- |
