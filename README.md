@@ -74,8 +74,10 @@ Differences from that exercise: the toolkit is now called the Microsoft 365 Agen
 
 > **Important:** Open the folder that directly contains `m365agents.yml`, `package.json` and `appPackage/`. This must be the root of the workspace, not a nested folder (for example, `Documents\teams-app\teams-app`). Otherwise the Microsoft 365 Agents Toolkit cannot recognise the project later on.
 
+### Create a new project from the template (alternative)
+
 <details>
-<summary><strong>Create a new project from the template (alternative)</strong></summary>
+<summary>Show steps</summary>
 
 > **Note:** If you do not want to clone the repository, you can create the project directly in VS Code using the steps below. However, the repository contains modifications that add LLM calling (Azure OpenAI), and those features are not present in the default sample template.
 
